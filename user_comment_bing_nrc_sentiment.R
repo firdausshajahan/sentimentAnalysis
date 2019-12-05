@@ -33,6 +33,7 @@ bing_user_word_no_count <- user_comment_tokens %>%
 bing_word_time <- bing_user_word_no_count %>%
   inner_join(combineDataComplete, by = "id") %>%
   select(id,word,sentiment,time)
+write_csv(bing_word_time, path = "C:/Users/seetrustudio-29/Documents/firdaus/studies/researchProject/SentimentAnalysis/data/finalData/bingLabelData.csv")
 
 bing_user_word_counts <- user_comment_tokens %>%
   inner_join(get_sentiments("bing")) %>%
@@ -58,10 +59,12 @@ nrc_word_time <- nrc_user_word_no_counts %>%
   inner_join(combineDataComplete, by = "id") %>%
   select(id,word,sentiment,time) %>%
   filter( word !="grab")
+write_csv(nrc_word_time, path = "C:/Users/seetrustudio-29/Documents/firdaus/studies/researchProject/SentimentAnalysis/data/finalData/nrcLabelData.csv")
 
 nrc_user_word_counts <- user_comment_tokens %>%
   inner_join(get_sentiments("nrc")) %>%
   count(word, sentiment, sort = TRUE) %>%
+  filter( word != "grab" ) %>%
   ungroup()
 
 nrc_user_word_counts %>%
