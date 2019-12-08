@@ -51,5 +51,9 @@ ggplot() +
   xlab('Date') +
   ylab('Frequency Comments')
 
+grabCommentsDMPM <- grabComments %>%
+  unnest_tokens(word, comment) %>%
+  filter(word =="pm" | word =="dm" | word=="inbox")%>%
+  count(word)
 
 
